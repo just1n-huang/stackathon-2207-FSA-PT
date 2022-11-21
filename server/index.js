@@ -1,3 +1,10 @@
+try {
+  require("../secrets.js");
+} catch (ex) {
+  console.log(ex);
+  console.log("SET environment varialbe for API_KEY");
+}
+
 const app = require("./app");
 const { syncAndSeed, User } = require("./db");
 const { Server } = require("socket.io");
