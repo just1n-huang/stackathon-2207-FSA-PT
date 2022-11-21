@@ -85,9 +85,10 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import Photo from "./Photo";
-const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`;
+// const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`;
 // console.log(process.env.REACT_APP_ACCESS_KEY);
-// const clientID = `?client_id=UzwcBb4YoCuV0lvLoU__6v1-cbVYXiK9ILJzKeJhSFU`;
+
+const clientID = `?client_id=UzwcBb4YoCuV0lvLoU__6v1-cbVYXiK9ILJzKeJhSFU`;
 const mainUrl = `https://api.unsplash.com/photos/`;
 const searchUrl = `https://api.unsplash.com/search/photos/`;
 
@@ -99,11 +100,12 @@ function App() {
     setLoading(true);
     let url;
     url = `${mainUrl}${clientID}`;
-    console.log(url);
+
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      setPhotos(data);
+      setLoading(false);
     } catch (ex) {
       setLoading(false);
       console.log(ex);
@@ -114,7 +116,23 @@ function App() {
     fetchImages();
   }, []);
 
-  return <h2>Stackathon Photo Generator</h2>;
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    console.log("hello");
+  };
+
+  return (
+    <main>
+      <section className="search">
+        <form className="search-form">
+          <input type="text" placeholder="search" className="form-input" />
+          <button type="submit" className="submit-btn" onClick={handleSubmit}>
+            <FaSearch />
+          </button>
+        </form>
+      </section>
+    </main>
+  );
 }
 
 export default App;
