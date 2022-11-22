@@ -22,7 +22,7 @@ export const fetchFave = () => {
 
 export const createFave = (fave) => {
   return async (dispatch) => {
-    const response = await axios.post("/api/campuses", fave);
+    const response = await axios.post("/api/faves", fave);
     dispatch({ type: "CREATE_FAVE", payload: response.data });
   };
 };

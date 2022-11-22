@@ -4,7 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material/";
 import { useDispatch, useSelector } from "react-redux";
-import { loginWithToken } from "../store";
+import { createFave, loginWithToken } from "../store";
 
 const Photo = ({
   id,
@@ -36,16 +36,18 @@ const Photo = ({
                 variant="text"
                 style={{ color: "white", borderColor: "white" }}
                 onClick={() => {
-                  console.log({
-                    id,
-                    imageUrl: regular,
-                    alt_description,
-                    likes,
-                    username: name,
-                    portfolioUrl: portfolio_url,
-                    profileImage: medium,
-                    userId: auth.id,
-                  });
+                  dispatch(
+                    createFave({
+                      id,
+                      imageUrl: regular,
+                      alt_description,
+                      likes,
+                      username: name,
+                      portfolioUrl: portfolio_url,
+                      profileImage: medium,
+                      userId: auth.id,
+                    })
+                  );
                 }}
               >
                 <FavoriteBorderIcon />
