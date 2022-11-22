@@ -252,4 +252,5 @@ a:visited {
   display: flex;
   flex-direction: column;
   color: var(--clr-grey-3);
+  align-items: center;
 }

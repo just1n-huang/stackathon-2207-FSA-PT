@@ -1,4 +1,7 @@
 import React from "react";
+import DownloadIcon from "@mui/icons-material/Download";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Button } from "@mui/material/";
 
 const Photo = ({
   urls: { regular },
@@ -17,6 +20,22 @@ const Photo = ({
         <div>
           <h4>{name}</h4>
           <p>{likes} likes</p>
+          <div>
+            <Button
+              variant="text"
+              style={{ color: "white", borderColor: "white" }}
+            >
+              <FavoriteBorderIcon />
+            </Button>
+            <Button
+              href={regular}
+              download
+              variant="text"
+              style={{ color: "white", borderColor: "white" }}
+            >
+              <DownloadIcon />
+            </Button>
+          </div>
         </div>
         <a href={portfolio_url}>
           <img src={medium} alt={name} />

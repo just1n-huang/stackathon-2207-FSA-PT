@@ -178,7 +178,7 @@ function App() {
         <nav>
           <div>
             <Link to="/">
-              <h1>aperture</h1>
+              <h3>aperture</h3>
             </Link>
           </div>
           <div className="nav-links">
@@ -191,7 +191,7 @@ function App() {
         <nav>
           <div>
             <Link to="/">
-              <h1>aperture</h1>
+              <h3>aperture</h3>
             </Link>
           </div>
           <div className="nav-links">
