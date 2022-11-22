@@ -1,26 +1,3 @@
-// import React from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { logout } from '../store';
-
-// const Home = ()=> {
-//   const { auth } = useSelector(state => state);
-//   const dispatch = useDispatch();
-//   return (
-//     <div>
-//       <h1>Home</h1>
-//       <div>
-//         Welcome { auth.username }!!
-//         <button onClick={()=> dispatch(logout())}>Logout</button>
-//         {
-//           !!auth.avatar && <img src={auth.avatar} />
-//         }
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Home;
-
 import React, { useState, useEffect, useRef } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { loginWithToken, fetchCart, fetchOnlineUsers } from "../store";
@@ -29,14 +6,11 @@ import { FaSearch } from "react-icons/fa";
 import Photo from "./Photo";
 import { CircularProgress } from "@mui/material";
 
-// const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`;
-// console.log(process.env.REACT_APP_ACCESS_KEY);
-
 const clientID = `?client_id=UzwcBb4YoCuV0lvLoU__6v1-cbVYXiK9ILJzKeJhSFU`;
 const mainUrl = `https://api.unsplash.com/photos/`;
 const searchUrl = `https://api.unsplash.com/search/photos/`;
 
-function Home() {
+const Home = () => {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
@@ -143,6 +117,6 @@ function Home() {
       </section>
     </main>
   );
-}
+};
 
 export default Home;
