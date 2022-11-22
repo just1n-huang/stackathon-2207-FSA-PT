@@ -86,24 +86,32 @@ import React, { useState, useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { loginWithToken, fetchCart, fetchOnlineUsers } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
+// import { FaSearch } from "react-icons/fa";
 import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
 import Photo from "./Photo";
-import { CircularProgress } from "@mui/material";
+import { logout } from "../store";
+import FavoritePhotos from "./FavoritePhotos";
+
+// import { CircularProgress } from "@mui/material";
 // const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`;
 // console.log(process.env.REACT_APP_ACCESS_KEY);
 
-const clientID = `?client_id=UzwcBb4YoCuV0lvLoU__6v1-cbVYXiK9ILJzKeJhSFU`;
-const mainUrl = `https://api.unsplash.com/photos/`;
-const searchUrl = `https://api.unsplash.com/search/photos/`;
+// const clientID = `?client_id=UzwcBb4YoCuV0lvLoU__6v1-cbVYXiK9ILJzKeJhSFU`;
+// const mainUrl = `https://api.unsplash.com/photos/`;
+// const searchUrl = `https://api.unsplash.com/search/photos/`;
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [photos, setPhotos] = useState([]);
-  const [page, setPage] = useState(0);
-  const [query, setQuery] = useState("");
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loginWithToken());
+  }, []);
+  // const [loading, setLoading] = useState(false);
+  // const [photos, setPhotos] = useState([]);
+  // const [page, setPage] = useState(0);
+  // const [query, setQuery] = useState("");
 
   // const fetchImages = async () => {
   //   setLoading(true);
@@ -166,21 +174,40 @@ function App() {
 
   return (
     <main>
-      <nav>
-        <div>
-          <Link to="/">
-            <h1>aperture</h1>
-          </Link>
-        </div>
-        <div className="nav-links">
-          <Link to="/login">login</Link>
-          <p>|</p>
-          <Link to="/register">register</Link>
-        </div>
-      </nav>
+      {!auth.id ? (
+        <nav>
+          <div>
+            <Link to="/">
+              <h1>aperture</h1>
+            </Link>
+          </div>
+          <div className="nav-links">
+            <Link to="/login">login</Link>
+            <p>|</p>
+            <Link to="/register">register</Link>
+          </div>
+        </nav>
+      ) : (
+        <nav>
+          <div>
+            <Link to="/">
+              <h1>aperture</h1>
+            </Link>
+          </div>
+          <div className="nav-links">
+            <Link to="/favorite">favorite photos</Link>
+            <p>|</p>
+            <Link to="#" onClick={() => dispatch(logout())}>
+              logout
+            </Link>
+          </div>
+        </nav>
+      )}
+
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/favorite" element={<FavoritePhotos />} />
         <Route path="/" element={<Home />} />
       </Routes>
       {/* 

@@ -237,6 +237,7 @@ nav {
   color: var(--clr-grey-3);
 }
 
+a,
 a:visited {
   color: var(--clr-grey-3);
 }
@@ -245,7 +246,8 @@ a:visited {
   display: flex;
 }
 
-.sign-in {
+.sign-in,
+.register {
   margin: 1rem 1rem;
   display: flex;
   flex-direction: column;

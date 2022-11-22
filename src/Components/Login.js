@@ -8,6 +8,7 @@ import { Button } from "@mui/material/";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -20,6 +21,7 @@ const Login = () => {
   const login = (ev) => {
     ev.preventDefault();
     dispatch(attemptLogin(credentials));
+    navigate("/");
   };
   return (
     <div className="sign-in">
@@ -45,7 +47,7 @@ const Login = () => {
           onChange={onChange}
         />
         <br />
-        <Button variant="text" style={{ textTransform: "none" }}>
+        <Button type="submit" variant="text" style={{ textTransform: "none" }}>
           sign in
         </Button>
       </form>
