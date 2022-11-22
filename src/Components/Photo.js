@@ -73,7 +73,7 @@ const Photo = ({
           </div>
         </div>
         <a href={portfolio_url}>
-          <img src={medium} alt={name} />
+          <img className="profile-photo" src={medium} alt={name} />
         </a>
       </div>
     </article>

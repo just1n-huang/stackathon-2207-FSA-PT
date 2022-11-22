@@ -69,7 +69,11 @@ const FavoritePhotos = () => {
                     </div>
                   </div>
                   <a href={post.portfolio_url}>
-                    <img src={post.profileImage} alt={post.username} />
+                    <img
+                      className="profile-photo"
+                      src={post.profileImage}
+                      alt={post.username}
+                    />
                   </a>
                 </div>
               </article>

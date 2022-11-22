@@ -8,7 +8,7 @@ console.log(process.env);
 const init = async () => {
   try {
     await syncAndSeed();
-    const port = process.env.PORT || 3300;
+    const port = process.env.PORT || 3000;
     const server = app.listen(port, () =>
       console.log(`listening on port ${port}`)
     );
