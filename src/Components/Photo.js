@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DownloadIcon from "@mui/icons-material/Download";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material/";
+import { useDispatch, useSelector } from "react-redux";
+import { loginWithToken } from "../store";
 
 const Photo = ({
   urls: { regular },
@@ -14,6 +16,12 @@ const Photo = ({
     profile_image: { medium },
   },
 }) => {
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loginWithToken());
+  }, []);
+
   return (
     <article className="photo">
       <img src={regular} alt={alt_description} />
@@ -22,12 +30,26 @@ const Photo = ({
           <h4>{name}</h4>
           <p>{likes} likes</p>
           <div>
-            <Button
-              variant="text"
-              style={{ color: "white", borderColor: "white" }}
-            >
-              <FavoriteBorderIcon />
-            </Button>
+            {auth.id ? (
+              <Button
+                variant="text"
+                style={{ color: "white", borderColor: "white" }}
+                onClick={() => {
+                  console.log({
+                    urls: { regular },
+                    alt_description,
+                    likes,
+                    user: {
+                      name,
+                      portfolio_url,
+                      profile_image: { medium },
+                    },
+                  });
+                }}
+              >
+                <FavoriteBorderIcon />
+              </Button>
+            ) : null}
             <Button
               href={regular}
               download={alt_description}
