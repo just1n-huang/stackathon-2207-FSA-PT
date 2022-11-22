@@ -29,6 +29,7 @@ export const createFave = (fave) => {
 
 export const deleteFave = (fave) => {
   return async (dispatch) => {
+    console.log(fave);
     await axios.delete(`/api/faves/${fave.id}`);
     dispatch({ type: "DELETE_FAVE", payload: fave });
   };

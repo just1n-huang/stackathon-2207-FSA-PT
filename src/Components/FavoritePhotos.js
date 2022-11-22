@@ -4,7 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material/";
 import { useDispatch, useSelector } from "react-redux";
-import { createFave, fetchFave, loginWithToken } from "../store";
+import { createFave, deleteFave, fetchFave, loginWithToken } from "../store";
 
 const FavoritePhotos = () => {
   const { auth } = useSelector((state) => state);
@@ -36,7 +36,7 @@ const FavoritePhotos = () => {
                           variant="text"
                           style={{ color: "white", borderColor: "white" }}
                           onClick={() => {
-                            console.log("hi");
+                            dispatch(deleteFave(post));
                           }}
                         >
                           <FavoriteBorderIcon />

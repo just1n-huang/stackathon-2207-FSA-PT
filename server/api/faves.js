@@ -17,7 +17,7 @@ app.post("/", async (req, res, next) => {
   }
 });
 
-app.delete("/faves/:id", async (req, res, next) => {
+app.delete("/:id", async (req, res, next) => {
   const fave = await Fave.findByPk(req.params.id);
   await fave.destroy();
   res.sendStatus(204);
