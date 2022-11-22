@@ -174,7 +174,7 @@ function App() {
         </div>
         <div className="nav-links">
           <Link to="/login">login</Link>
-          <p>/</p>
+          <p>|</p>
           <Link to="/register">register</Link>
         </div>
       </nav>
