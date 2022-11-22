@@ -5,6 +5,8 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material/";
 import { useDispatch, useSelector } from "react-redux";
 import { createFave, deleteFave, fetchFave, loginWithToken } from "../store";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { Face } from "@mui/icons-material";
 
 const FavoritePhotos = () => {
   const { auth } = useSelector((state) => state);
@@ -18,10 +20,15 @@ const FavoritePhotos = () => {
   console.log(auth);
   console.log(fave);
 
+  const favoritedByAuth = fave.filter((post) => post.userId === auth.id);
+
+  if (favoritedByAuth.length === 0)
+    return <h4 style={{ margin: "1rem" }}>Save some photos first</h4>;
+
   return (
     <section className="photos">
       <div className="photos-center">
-        {fave.map((post) => {
+        {favoritedByAuth.map((post) => {
           return (
             <div key={post.id}>
               <article className="photo" key={post.id}>
@@ -39,7 +46,7 @@ const FavoritePhotos = () => {
                             dispatch(deleteFave(post));
                           }}
                         >
-                          <FavoriteBorderIcon />
+                          <DeleteOutlineIcon />
                         </Button>
                       ) : null}
                       <Button
