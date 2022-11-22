@@ -113,12 +113,10 @@ function App() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      // console.log(data);
       setPhotos((oldPhotos) => {
         if (query && page === 1) {
           return data.results;
         } else if (query) {
-          // return [...oldPhotos, ...data];
           return [...oldPhotos, ...data.results];
         } else {
           return [...oldPhotos, ...data];
@@ -140,15 +138,16 @@ function App() {
     const event = window.addEventListener("scroll", () => {
       if (
         !loading &&
-        window.innerHeight + window.scrollY >= document.body.scrollHeight - 3
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 2
       ) {
         setPage((oldPage) => {
-          return oldPage + 1;
+          if (oldPage === 0 && !query) {
+            return oldPage + 2;
+          } else {
+            return oldPage + 1;
+          }
         });
       }
-      // console.log(`innerHeight ${window.innerHeight}`);
-      // console.log(`scrollY ${window.scrollY}`);
-      // console.log(`bodyHeight ${document.body.scrollHeight}`);
     });
     return () => window.removeEventListener("scroll", event);
   }, []);
