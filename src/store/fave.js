@@ -1,6 +1,6 @@
 import axios from "axios";
 const fave = (state = [], action) => {
-  if (action.type === "SET_FAVE") {
+  if (action.type === "SET_FAVES") {
     return action.payload;
   }
 
