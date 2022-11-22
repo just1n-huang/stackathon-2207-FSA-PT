@@ -28,7 +28,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import Photo from "./Photo";
 import { CircularProgress } from "@mui/material";
-import DownloadIcon from "@mui/icons-material/Download";
+
 // const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`;
 // console.log(process.env.REACT_APP_ACCESS_KEY);
 

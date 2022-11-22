@@ -29,7 +29,7 @@ const Photo = ({
             </Button>
             <Button
               href={regular}
-              download
+              download={alt_description}
               variant="text"
               style={{ color: "white", borderColor: "white" }}
             >
