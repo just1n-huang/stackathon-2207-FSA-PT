@@ -1,6 +1,7 @@
 import React from "react";
 import DownloadIcon from "@mui/icons-material/Download";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Button } from "@mui/material/";
 
 const Photo = ({
@@ -34,6 +35,15 @@ const Photo = ({
               style={{ color: "white", borderColor: "white" }}
             >
               <DownloadIcon />
+            </Button>
+            <Button
+              variant="text"
+              style={{ color: "white", borderColor: "white" }}
+              onClick={() => {
+                navigator.clipboard.writeText(`${regular}`);
+              }}
+            >
+              <ContentCopyIcon />
             </Button>
           </div>
         </div>
