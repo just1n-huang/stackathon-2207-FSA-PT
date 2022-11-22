@@ -21,7 +21,7 @@
 
 // export default Home;
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { loginWithToken, fetchCart, fetchOnlineUsers } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
@@ -39,8 +39,10 @@ const searchUrl = `https://api.unsplash.com/search/photos/`;
 function Home() {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [newImages, setNewImages] = useState(false);
+  const mounted = useRef(false);
 
   const fetchImages = async () => {
     setLoading(true);
@@ -66,10 +68,11 @@ function Home() {
           return [...oldPhotos, ...data];
         }
       });
+      setNewImages(false);
       setLoading(false);
     } catch (ex) {
+      setNewImages(false);
       setLoading(false);
-      console.log(ex);
     }
   };
 
@@ -77,27 +80,34 @@ function Home() {
     fetchImages();
   }, [page]);
 
-  // second useEffect for infinite scroll
   useEffect(() => {
-    const event = window.addEventListener("scroll", () => {
-      if (
-        !loading &&
-        window.innerHeight + window.scrollY >= document.body.scrollHeight - 2
-      ) {
-        setPage((oldPage) => {
-          if (oldPage === 0 && !query) {
-            return oldPage + 2;
-          } else {
-            return oldPage + 1;
-          }
-        });
-      }
-    });
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    if (!newImages) return;
+    if (loading) return;
+    setPage((oldPage) => oldPage + 1);
+  }, [newImages]);
+
+  const event = () => {
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+      setNewImages(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", event);
     return () => window.removeEventListener("scroll", event);
   }, []);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
+    if (!query) return;
+    if (page === 1) {
+      fetchImages();
+      return;
+    }
     setPage(1);
   };
 
