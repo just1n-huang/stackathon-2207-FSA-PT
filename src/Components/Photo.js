@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginWithToken } from "../store";
 
 const Photo = ({
+  id,
   urls: { regular },
   alt_description,
   likes,
@@ -36,14 +37,14 @@ const Photo = ({
                 style={{ color: "white", borderColor: "white" }}
                 onClick={() => {
                   console.log({
-                    urls: { regular },
+                    id,
+                    imageUrl: regular,
                     alt_description,
                     likes,
-                    user: {
-                      name,
-                      portfolio_url,
-                      profile_image: { medium },
-                    },
+                    username: name,
+                    portfolioUrl: portfolio_url,
+                    profileImage: medium,
+                    userId: auth.id,
                   });
                 }}
               >
